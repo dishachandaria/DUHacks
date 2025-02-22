@@ -1,0 +1,116 @@
+/* Ensure the background covers the entire page */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(135deg, #6e8efb, #a777e3); /* Same as auth.css */
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Admin Dashboard Container */
+.admin-dashboard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Dashboard Card */
+.admin-card {
+    background: rgba(255, 255, 255, 0.15); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Glassmorphism effect */
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 400px;
+    color: white;
+}
+
+/* Title */
+.admin-title {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Buttons Container */
+.dashboard-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+/* Buttons */
+.dashboard-button {
+    padding: 12px;
+    background: white;
+    color: #6e8efb;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.dashboard-button:hover {
+    background: #5a7be8;
+    color: white;
+}
+
+/* Budget Form */
+.budget-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.budget-input {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    outline: none;
+}
+
+.budget-input::placeholder {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.budget-input:focus {
+    border-color: white;
+    box-shadow: 0px 0px 8px rgba(255, 255, 255, 0.3);
+}
+
+/* Center everything */
+.admin-dashboard, .admin-card {
+    text-align: center;
+}
+/* Change the color of dropdown options */
+.budget-input option {
+    background: #f8f8f8; /* Background for options */
+    color: #8e44ad; /* Purple text color */
+    font-weight: bold;
+  }
+  
+  /* Change color when hovering over options */
+  .budget-input option:hover {
+    background: #dcdde1; /* Light gray background */
+    color: #3498db; /* Blue text on hover */
+  }

@@ -34,6 +34,20 @@ const ExpenseSchema = new mongoose.Schema({
 
 const Expense = mongoose.model("Expense", ExpenseSchema);
 
+
+//  Budget Schema (Includes Month & Year)
+const BudgetSchema = new mongoose.Schema({
+  month: String,
+  year: Number,
+  monthlyBudget: Number,
+  yearlySavings: Number,
+});
+
+// Ensure unique month-year combinations
+BudgetSchema.index({ month: 1, year: 1 }, { unique: true });
+
+const Budget = mongoose.model("Budget", BudgetSchema);
+
 // Register API
 app.post("/register", async (req, res) => {
   const { email, password, role } = req.body;
@@ -81,7 +95,39 @@ app.get("/api/expenses", async (req, res) => {
   }
 });
 
+app.post("/add-budget", async (req, res) => {
+  try {
+    const { month, year, monthlyBudget, yearlySavings } = req.body;
+    if (!month || !year || !monthlyBudget || !yearlySavings) {
+      return res.status(400).json({ message: "All fields are required" });
+    }
 
+    // Check if a budget for this month & year already exists
+    const existingBudget = await Budget.findOne({ month, year });
+    if (existingBudget) {
+      return res.status(400).json({ message: "Budget for this month already exists" });
+    }
+
+    // Save new budget entry
+    const newBudget = new Budget({ month, year, monthlyBudget, yearlySavings });
+    await newBudget.save();
+
+    res.status(201).json({ message: "Budget added successfully!", budget: newBudget });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
+// **Fetch All Budgets API**
+app.get("/budgets", async (req, res) => {
+  try {
+    const budgets = await Budget.find().sort({ year: -1, month: -1 });
+    res.status(200).json(budgets);
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+});
 
 app.listen(5000, () => console.log("Server running on port 5000"));
 
