@@ -8,7 +8,7 @@ CORS(app)
 
 # Setup Gemini API
 def setup_gemini():
-    genai.configure(api_key="AIzaSyCNsqEuD6CE4COQzxcqhaZVbz8xnRLmuN8")
+    genai.configure(api_key)
 
 setup_gemini()
 model = genai.GenerativeModel("gemini-pro")
