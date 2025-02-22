@@ -8,6 +8,7 @@ import AddExpense from "./components/AddExpense";
 import ViewHistory from "./components/ViewHistory.jsx";
 import AddBudget from "./components/AddBudget";
 import "./App.css";
+import ViewAnalysis from "./components/ViewAnalysis.jsx";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         {/* Admin Routes */}
         <Route path="/admin" element={<AdminDashboard />} />
         <Route path="/add-budget" element={<AddBudget />} /> {/* Separate route for add-budget */}
+        <Route path="/view-analysis" element={<ViewAnalysis />} />
 
         {/* User Routes */}
         <Route path="/user" element={<UserPage />}>
