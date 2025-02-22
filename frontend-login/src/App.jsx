@@ -2,9 +2,9 @@ import React from "react";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./components/Register";
-import Login from "./Login";
-import AdminDashboard from "./components/AdminDashboard";
-import UserDashboard from "./components/UserDashboard";
+import Login from "./Login.jsx";
+import AdminDashboard from "./components/AdminDashboard.jsx";
+import UserDashboard from "./components/UserDashboard.jsx";
 
 function App() {
   return (
