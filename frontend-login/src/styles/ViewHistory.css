@@ -1,0 +1,68 @@
+/* ViewHistory.css */
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+}
+
+h2 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.filter-dropdown {
+  width: 100%;
+  max-width: 200px;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.filter-dropdown:focus {
+  border-color: #6e8efb;
+  outline: none;
+  box-shadow: 0px 0px 8px rgba(110, 142, 251, 0.3);
+}
+
+.expense-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.expense-table th,
+.expense-table td {
+  padding: 12px;
+  border: 1px solid #ccc;
+}
+
+.expense-table th {
+  background: #6e8efb;
+  color: white;
+  font-weight: bold;
+}
+
+.expense-table tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+.expense-table tr:hover {
+  background: #f1f1f1;
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}

@@ -1,0 +1,47 @@
+.page-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+  }
+  
+  .expense-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .expense-form input {
+    width: 95%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: 0.3s;
+  }
+  
+  .expense-form input:focus {
+    border-color: #6e8efb;
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(110, 142, 251, 0.3);
+  }
+  
+  .expense-form button {
+    width: 100%;
+    padding: 12px;
+    background: #6e8efb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  .expense-form button:hover {
+    background: #5a7be8;
+  }

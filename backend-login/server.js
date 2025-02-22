@@ -23,6 +23,17 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model("User", UserSchema);
 
+
+// Expense Schema & Model
+const ExpenseSchema = new mongoose.Schema({
+  date: String,
+  category: String,
+  name: String,
+  amount: Number,
+});
+
+const Expense = mongoose.model("Expense", ExpenseSchema);
+
 // Register API
 app.post("/register", async (req, res) => {
   const { email, password, role } = req.body;
@@ -45,6 +56,32 @@ app.post("/login", async (req, res) => {
   const token = jwt.sign({ id: user._id, role: user.role }, "secretkey", { expiresIn: "1h" });
   res.json({ token, role: user.role });
 });
+
+
+
+
+// Add an expense
+app.post("/api/expenses", async (req, res) => {
+  try {
+    const newExpense = new Expense(req.body);
+    await newExpense.save();
+    res.status(201).json(newExpense);
+  } catch (error) {
+    res.status(500).json({ message: "Error adding expense", error });
+  }
+});
+
+// Get all expenses
+app.get("/api/expenses", async (req, res) => {
+  try {
+    const expenses = await Expense.find();
+    res.json(expenses);
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching expenses", error });
+  }
+});
+
+
 
 app.listen(5000, () => console.log("Server running on port 5000"));
 
