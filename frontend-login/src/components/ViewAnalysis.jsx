@@ -1,13 +1,19 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { TbMessageChatbotFilled } from "react-icons/tb";
 import { IoMdClose } from "react-icons/io"; // Import close icon
+import { Bar, Pie } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement } from "chart.js";
 import "./ViewAnalysis.css";
+
+ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale, LinearScale, BarElement);
 
 const ViewAnalysis = () => {
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [categoryData, setCategoryData] = useState([]);
+  const [monthlyData, setMonthlyData] = useState([]);
 
   const toggleChatbot = () => {
     setIsChatOpen(!isChatOpen);
@@ -31,12 +37,70 @@ const ViewAnalysis = () => {
     setInput("");
   };
 
+  useEffect(() => {
+    fetchCategoryAnalytics();
+    fetchMonthlyAnalytics();
+  }, []);
+
+  // Fetch category-wise analytics
+  const fetchCategoryAnalytics = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/expenses/analytics/category");
+      setCategoryData(response.data);
+    } catch (error) {
+      console.error("Error fetching category analytics:", error);
+    }
+  };
+
+  // Fetch monthly trends analytics
+  const fetchMonthlyAnalytics = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/expenses/analytics/monthly");
+      setMonthlyData(response.data);
+    } catch (error) {
+      console.error("Error fetching monthly analytics:", error);
+    }
+  };
+
   return (
     <div className="view-analysis-container">
       {/* Analysis Section (Left) */}
       <div className="analysis-section">
-        <h1>View Analysis</h1>
-        <p>This is a section for viewing analysis.</p>
+        <h2>Admin Dashboard - Expense Analytics</h2>
+
+        {/* Category-wise Expense Breakdown */}
+        <div className="chart-container">
+          <h3>Expense Breakdown by Category</h3>
+          <Pie
+            data={{
+              labels: categoryData.map((item) => item._id),
+              datasets: [
+                {
+                  data: categoryData.map((item) => item.totalAmount),
+                  backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56", "#4CAF50", "#FF9800", "#9C27B0"],
+                },
+              ],
+            }}
+          />
+        </div>
+
+        {/* Monthly Expense Trends */}
+        <div className="chart-container">
+          <h3>Monthly Expense Trends</h3>
+          <Bar
+            data={{
+              labels: monthlyData.map((item) => item._id),
+              datasets: [
+                {
+                  label: "Total Expense",
+                  data: monthlyData.map((item) => item.totalAmount),
+                  backgroundColor: "#36A2EB",
+                },
+              ],
+            }}
+           
+          />
+        </div>
       </div>
 
       {/* Chatbot Toggle Icon */}

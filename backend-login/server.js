@@ -100,6 +100,8 @@ app.get("/api/expenses", async (req, res) => {
     res.status(500).json({ message: "❌ Error fetching expenses", error });
   }
 });
+const expenseRoutes = require("./routes/expenseRoutes");
+app.use("/api/expenses", expenseRoutes); 
 
 // ✅ Add a Budget
 app.post("/add-budget", async (req, res) => {
