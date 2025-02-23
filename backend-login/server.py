@@ -15,7 +15,7 @@ load_dotenv()
 
 # Setup Gemini API
 def setup_gemini():
-    api_key = os.getenv("API_KEY")  # Fetch API key from .env
+    api_key = os.getenv("GEMINI_API_KEY")  # Fetch API key from .env
     if not api_key:
         raise ValueError("API key is missing! Check your .env file.")
 
