@@ -96,6 +96,8 @@ const ViewAnalysis = () => {
       <div className="analysis-section">
         <h2>Admin Dashboard - Expense Analytics</h2>
 
+      <div className="charts-container">
+        <div className="charts-row">
         <div className="chart-container">
           <h3>Expense Breakdown by Category</h3>
           <Pie
@@ -126,7 +128,9 @@ const ViewAnalysis = () => {
             }}
           />
         </div>
+        </div>
 
+        <div className="charts-row">
         <div className="chart-container">
           <h3>Budget vs. Actual Expense per Month</h3>
           <Bar
@@ -156,7 +160,7 @@ const ViewAnalysis = () => {
               datasets: [
                 {
                   label: "Cumulative Expense",
-                  data: monthlyData.map((item, index) =>
+                  data: monthlyData.map((item, index) => 
                     monthlyData.slice(0, index + 1).reduce((sum, d) => sum + d.totalAmount, 0)
                   ),
                   borderColor: "#FF6384",
@@ -165,7 +169,7 @@ const ViewAnalysis = () => {
                 },
                 {
                   label: "Cumulative Budget",
-                  data: budgetData.map((item, index) =>
+                  data: budgetData.map((item, index) => 
                     budgetData.slice(0, index + 1).reduce((sum, d) => sum + d.monthlyBudget, 0)
                   ),
                   borderColor: "#4CAF50",
@@ -176,30 +180,33 @@ const ViewAnalysis = () => {
             }}
           />
         </div>
-      </div>
-
-      {/* Financial Insights Section */}
-      <div className="insights-container">
-        <h3>📊 Financial Insights</h3>
-        <div className="insights-grid">
-          <div className="insight-box">
-            <h4>🔹 Highest Expense Category</h4>
-            <p>{categoryData.length ? categoryData[0]._id : "Loading..."}</p>
-          </div>
-          <div className="insight-box">
-            <h4>📅 Peak Spending Month</h4>
-            <p>{monthlyData.length ? monthlyData[0]._id : "Loading..."}</p>
-          </div>
-          <div className="insight-box">
-            <h4>💰 Total Expenses This Year</h4>
-            <p>₹{monthlyData.reduce((total, item) => total + item.totalAmount, 0).toLocaleString()}</p>
-          </div>
-          <div className="insight-box">
-            <h4>📉 Lowest Spending Month</h4>
-            <p>{monthlyData.length ? monthlyData[monthlyData.length - 1]._id : "Loading..."}</p>
-          </div>
         </div>
       </div>
+
+      
+{/* Financial Insights Below */}
+<div className="insights-container">
+<h3>📊 Financial Insights</h3>
+<div className="insights-grid">
+  <div className="insight-box">
+    <h4>🔹 Highest Expense Category</h4>
+    <p>{categoryData.length ? categoryData[0]._id : "Loading..."}</p>
+  </div>
+  <div className="insight-box">
+    <h4>📅 Peak Spending Month</h4>
+    <p>{monthlyData.length ? monthlyData[0]._id : "Loading..."}</p>
+  </div>
+  <div className="insight-box">
+    <h4>💰 Total Expenses This Year</h4>
+    <p>₹{monthlyData.reduce((total, item) => total + item.totalAmount, 0).toLocaleString()}</p>
+  </div>
+  <div className="insight-box">
+    <h4>📉 Lowest Spending Month</h4>
+    <p>{monthlyData.length ? monthlyData[monthlyData.length - 1]._id : "Loading..."}</p>
+  </div>
+</div>
+</div>
+</div>
 
       {/* Chatbot Section */}
       {!isChatOpen && (
