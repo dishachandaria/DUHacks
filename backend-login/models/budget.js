@@ -14,4 +14,6 @@ const BudgetSchema = new mongoose.Schema({
   // Ensure unique month-year combination
   BudgetSchema.index({ month: 1, year: 1 }, { unique: true });
   
-  const Budget = mongoose.model("Budget", BudgetSchema);
+  const Budget = mongoose.models.Budget || mongoose.model("Budget", BudgetSchema);
+
+  module.exports = Budget;

@@ -127,6 +127,8 @@ app.post("/add-budget", async (req, res) => {
     res.status(500).json({ message: "❌ Server error", error });
   }
 });
+const budgetRoutes = require("./routes/budgetRoutes"); // Import the budget routes
+app.use("/", budgetRoutes);
 
 
 // ✅ Start Server on Port 5000
