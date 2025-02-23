@@ -180,24 +180,34 @@ const ViewAnalysis = () => {
               </div>
 
               <div className="chart-container">
-                <h3>Cumulative Expense vs. Budget Over Time</h3>
-                <Line
-                  data={{
-                    labels: monthlyData.map((item) => item._id),
-                    datasets: [
-                      {
-                        label: "Cumulative Expense",
-                        data: monthlyData.map((item, index) =>
-                          monthlyData.slice(0, index + 1).reduce((sum, d) => sum + d.totalAmount, 0)
-                        ),
-                        borderColor: "#FF6384",
-                        borderWidth: 2,
-                        fill: false,
-                      },
-                    ],
-                  }}
-                />
-              </div>
+  <h3>Cumulative Expense vs. Budget Over Time</h3>
+  <Line
+    data={{
+      labels: monthlyData.map((item) => item._id),
+      datasets: [
+        {
+          label: "Cumulative Expense",
+          data: monthlyData.map((item, index) =>
+            monthlyData.slice(0, index + 1).reduce((sum, d) => sum + d.totalAmount, 0)
+          ),
+          borderColor: "#FF6384",
+          borderWidth: 2,
+          fill: false,
+        },
+        {
+          label: "Cumulative Budget",
+          data: budgetData.map((item, index) =>
+            budgetData.slice(0, index + 1).reduce((sum, d) => sum + d.monthlyBudget, 0)
+          ),
+          borderColor: "#4CAF50",
+          borderWidth: 2,
+          fill: false,
+        },
+      ],
+    }}
+  />
+</div>
+
             </div>
           </div>
         </div>
@@ -228,12 +238,58 @@ onMouseUp={(e) => e.target.style.transform = "translateX(-50%) scale(1)"}
   📄 Export Analysis to PDF
 </button>
 
+  {/* Financial Insights Section */}
+  <div className="insights-container">
+        <h3>📊 Financial Insights</h3>
+        <div className="insights-grid">
+          <div className="insight-box">
+            <h4>🔹 Highest Expense Category</h4>
+            <p>{categoryData.length ? categoryData[0]._id : "Loading..."}</p>
+          </div>
+          <div className="insight-box">
+            <h4>📅 Peak Spending Month</h4>
+            <p>{monthlyData.length ? monthlyData[0]._id : "Loading..."}</p>
+          </div>
+          <div className="insight-box">
+            <h4>💰 Total Expenses This Year</h4>
+            <p>₹{monthlyData.reduce((total, item) => total + item.totalAmount, 0).toLocaleString()}</p>
+          </div>
+          <div className="insight-box">
+            <h4>📉 Lowest Spending Month</h4>
+            <p>{monthlyData.length ? monthlyData[monthlyData.length - 1]._id : "Loading..."}</p>
+          </div>
+        </div>
+      </div>
+      {/* Chatbot Section */}
+      {!isChatOpen && (
+        <div className="chatbot-icon" onClick={toggleChatbot}>
+          <TbMessageChatbotFilled />
+        </div>
+      )}
 
-      {/* Chatbot */}
-      {!isChatOpen && <div className="chatbot-icon" onClick={toggleChatbot}><TbMessageChatbotFilled /></div>}
       {isChatOpen && (
         <div className="chatbot-section open">
-          <IoMdClose className="close-icon" onClick={toggleChatbot} />
+          <div className="chatbot-header">
+            <h2>ExpensiBot – Your Smart Finance Guide!</h2>
+            <IoMdClose className="close-icon" onClick={toggleChatbot} />
+          </div>
+          <div className="chatbox">
+            {messages.map((msg, index) => (
+              <div key={index} className={`message ${msg.sender === "user" ? "user-message" : "bot-message"}`}>
+                {msg.text}
+              </div>
+            ))}
+          </div>
+          <div className="chat-input">
+            <input
+              type="text"
+              placeholder="Ask a financial question..."
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyPress={(e) => e.key === "Enter" && sendMessage()}
+            />
+            <button onClick={sendMessage}>Send</button>
+          </div>
         </div>
       )}
     </div>
@@ -241,4 +297,3 @@ onMouseUp={(e) => e.target.style.transform = "translateX(-50%) scale(1)"}
 };
 
 export default ViewAnalysis;
-
