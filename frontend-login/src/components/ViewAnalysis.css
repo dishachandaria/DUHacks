@@ -1,139 +1,147 @@
 /* Full Screen White */
 body, html {
-    margin: 0;
-    padding: 0;
-    background-color: #ffffff; /* White Background */
-    height: 100vh;
-    display: flex;
-  }
-  
-  /* Container */
-  .view-analysis-container {
-    display: flex;
-    height: 100vh;
-    width: 100vw;
-  }
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff; /* White Background */
+  height: 100vh;
+  display: flex;
+  overflow: hidden; /* Prevent background from being cut off */
+}
 
-  
-  
-  /* Analysis Section (Takes Most of the Space) */
-  .analysis-section {
-    flex: 1;
-    padding: 20px;
-    background-color: #ffffff;
-  }
-  
-  /* Chatbot Floating Icon */
-  .chatbot-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #007bff;
-    color: white;
-    padding: 12px;
-    border-radius: 50%;
-    font-size: 24px;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    transition: transform 0.2s ease-in-out;
-  }
-  
-  .chatbot-icon:hover {
-    transform: scale(1.1);
-  }
-  
-  /* Chatbot Section (Hidden by Default) */
-  .chatbot-section {
-    width: 30%;
-    padding: 20px;
-    background-color: #ffffff;
-    border-left: 2px solid #ccc;
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    right: -30%;
-    top: 0;
-    height: 100vh;
-    transition: right 0.3s ease-in-out;
-  }
-  
-  /* When Chatbot is Open */
-  .chatbot-section.open {
-    right: 0;
-  }
-  
-  /* Chatbox */
-  .chatbox {
-    flex: 1;
-    overflow-y: auto;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    height: 80vh;
-    background-color: #f4f4f4;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  /* Standardized Message Style */
-  .message {
-    padding: 10px;
-    border-radius: 8px;
-    margin: 5px 0;
-    max-width: 75%;
-    word-wrap: break-word;
-  }
-  
-  /* User Messages (Blue) */
-  .user-message {
-    align-self: flex-end;
-    background-color: #007bff;
-    color: white;
-  }
-  
-  /* Bot Messages (Grey) */
-  .bot-message {
-    align-self: flex-start;
-    background-color: #ccc;
-    color: black;
-  }
-  
-  /* Chat Input */
-  .chat-input {
-    display: flex;
-    margin-top: 10px;
-  }
-  
-  .chat-input input {
-    flex: 1;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .chat-input button {
-    padding: 8px 12px;
-    border: none;
-    background-color: #007bff;
-    color: white;
-    cursor: pointer;
-    margin-left: 5px;
-    border-radius: 5px;
-  }
+/* Container */
+.view-analysis-container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  overflow: auto; /* Allow scrolling if content overflows */
+}
 
-  
-  .chart-container {
-    width: 60%;
-    margin: auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background: #fff;
-    margin-bottom: 20px;
-  }
-  
-  
-  h2, h3 {
-    color: #333;
-  }
+/* Analysis Section (Takes Most of the Space) */
+.analysis-section {
+  flex: 1;
+  padding: 20px;
+  background-color: linear-gradient(135deg, #6e8efb, #a777e3);
+  overflow-y: auto; /* Allow scrolling within the section */
+}
+
+/* Chart Container */
+.chart-container {
+  width: 80%; /* Adjusted width */
+  max-width: 600px; /* Limit maximum width */
+  margin: 20px auto; /* Center the chart */
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background: #fff;
+}
+
+/* Chart Sizing */
+.chart-container canvas {
+  max-height: 300px; /* Limit chart height */
+  width: 100% !important; /* Ensure charts are responsive */
+}
+
+/* Headings */
+h2, h3 {
+  color: #333;
+  text-align: center; /* Center headings */
+}
+
+/* Chatbot Floating Icon (Unchanged) */
+.chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: white;
+  padding: 12px;
+  border-radius: 50%;
+  font-size: 24px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease-in-out;
+}
+
+.chatbot-icon:hover {
+  transform: scale(1.1);
+}
+
+/* Chatbot Section (Hidden by Default) */
+.chatbot-section {
+  width: 30%;
+  padding: 20px;
+  background-color: #ffffff;
+  border-left: 2px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  right: -30%;
+  top: 0;
+  height: 100vh;
+  transition: right 0.3s ease-in-out;
+}
+
+/* When Chatbot is Open */
+.chatbot-section.open {
+  right: 0;
+}
+
+/* Chatbox */
+.chatbox {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  height: 80vh;
+  background-color: #f4f4f4;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Standardized Message Style */
+.message {
+  padding: 10px;
+  border-radius: 8px;
+  margin: 5px 0;
+  max-width: 75%;
+  word-wrap: break-word;
+}
+
+/* User Messages (Blue) */
+.user-message {
+  align-self: flex-end;
+  background-color: #007bff;
+  color: white;
+}
+
+/* Bot Messages (Grey) */
+.bot-message {
+  align-self: flex-start;
+  background-color: #ccc;
+  color: black;
+}
+
+/* Chat Input */
+.chat-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.chat-input button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  margin-left: 5px;
+  border-radius: 5px;
+}
