@@ -2,16 +2,29 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import google.generativeai as genai
 from pymongo import MongoClient
+import google.generativeai as genai
+import os
+from dotenv import load_dotenv 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": ["http://localhost:5173", "http://localhost:5174"]}})
+
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Setup Gemini API
 def setup_gemini():
-    genai.configure(api_key)
+    api_key = os.getenv("API_KEY")  # Fetch API key from .env
+    if not api_key:
+        raise ValueError("API key is missing! Check your .env file.")
 
-setup_gemini()
+    genai.configure(api_key=api_key)  # Configure with the loaded API key
+    print("✅ Gemini API configured successfully!")  # Debugging message
+
+# Initialize the Gemini model
 model = genai.GenerativeModel("gemini-pro")
+print("✅ Gemini Model initialized!")
 
 # Connect to MongoDB
 MONGO_URI = "mongodb+srv://userdb:pass123@user-expense.yibsn.mongodb.net/User-Expense?retryWrites=true&w=majority"

@@ -128,15 +128,6 @@ app.post("/add-budget", async (req, res) => {
   }
 });
 
-// ✅ Fetch All Budgets
-app.get("/budgets", async (req, res) => {
-  try {
-    const budgets = await Budget.find().sort({ year: -1, month: -1 });
-    res.status(200).json(budgets);
-  } catch (error) {
-    res.status(500).json({ message: "❌ Server error", error });
-  }
-});
 
 // ✅ Start Server on Port 5000
 app.listen(5000, () => console.log("🚀 Server running on port 5000"));
