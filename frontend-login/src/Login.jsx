@@ -23,7 +23,7 @@ const Login = () => {
   return (
     <div className="auth-container">
       <div className="auth-card">
-        <h2 className="auth-title">Budget Planner - Login</h2>
+        <h2 className="auth-title">Login to Expensify</h2>
         <form className="auth-form" onSubmit={handleLogin}>
           <input className="auth-input" type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
           <input className="auth-input" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />
